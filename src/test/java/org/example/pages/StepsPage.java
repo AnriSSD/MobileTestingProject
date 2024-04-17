@@ -2,6 +2,7 @@ package org.example.pages;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.example.Utils;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -42,15 +43,21 @@ public class StepsPage {
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[2]/android.view.ViewGroup[4]/android.view.View")
     private WebElement createAccount;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.View")
-    private WebElement nextButtonFirst;
+    private WebElement nextButton;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[1]")
     private WebElement nameField;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.View[7]")
+    private WebElement nameFieldSecond;
     @FindBy(id = "com.facebook.lite:id/inline_textbox_edittext")
     private WebElement name;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[2]")
     private WebElement surnameField;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[1]")
+    private WebElement surnameFieldSecond;
     @FindBy(id = "com.facebook.lite:id/inline_textbox_edittext")
     private WebElement surname;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.View")
+    private WebElement nextButtonFirst;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.View")
     private WebElement nextButtonSecond;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.View[6]")
@@ -59,8 +66,10 @@ public class StepsPage {
     private WebElement mobilePhone;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[2]")
     private WebElement registerWithEmail;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.View[5]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.View[6]")
     private WebElement emailField;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.View[5]")
+    private WebElement secondEmailField;
     @FindBy(id = "com.facebook.lite:id/inline_textbox_edittext")
     private WebElement email;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.view.ViewGroup")
@@ -136,14 +145,22 @@ public class StepsPage {
 
     public void clickRegisterButton() {
         clickToBtn(createAccount);
-        clickToBtn(nextButtonFirst);
+        clickToBtn(nextButton);
     }
-
-    public void fillNameSurname(String firstField, String secondField, boolean clickToBtn) {
+    public void fillOnlyName (String firstField, boolean clickToBtn) {
         nameField.click();
         sendkey(firstField, name);
-        surnameField.click();
-        sendkey(secondField, surname);
+        if (clickToBtn) {
+            // clickToNext();
+            clickToBtn(nextButtonFirst);
+        }
+    }
+    public void fillNameSurname(String firstName, String lastName, boolean clickToBtn) {
+        nameFieldSecond.click();
+        clearField(name);
+        sendkey(firstName, name);
+        surnameFieldSecond.click();
+        sendkey(lastName, surname);
 
         if (clickToBtn) {
             // clickToNext();
@@ -160,17 +177,24 @@ public class StepsPage {
             clickToBtn(nextButtonThird);
         }
     }
-    public void fillEmail (String mail, boolean clickToBtn) {
-        clickToBtn(registerWithEmail);
-        clickToBtn(emailField);
-        try {
-            Thread.sleep(2000); // 2 second delay
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public void fillIncompleteEmail (String mail, boolean clickToBtn) {
+        if (clickToBtn) {
+            // clickToSignUp();
+            clickToBtn(registerWithEmail);
+            wait.until(ExpectedConditions.visibilityOf(emailField));
+            emailField.click();
+            clearField(email);
+            sendkey(mail, email);
+            clickToBtn(nextButtonThird);
         }
-        clearField(email);
-        sendkey(mail,email);
-        clickToBtn(nextButtonThird);
+    }
+    public void fillEmail (String number, boolean clickToBtn) {
+        if (clickToBtn) {
+            clickToBtn(secondEmailField);
+            clearField(email);
+            sendkey(number, email);
+            clickToBtn(nextButtonThird);
+        }
     }
 }
 

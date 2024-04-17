@@ -6,27 +6,46 @@ import org.example.pages.StepsPage;
 import org.testng.annotations.Test;
 
 public class NegativeTest extends Base {
+    @Test (description = "Checks the ability to enter only first name without surname")
+    public void attemptWithoutSurname () {
+        StepsPage page = new StepsPage(driver);
+        page.clickRegisterButton();
+        page.fillOnlyName("Anri",true);
+    }
     @Test (description = "Checks the ability to enter special characters in the name and surname field")
     public void charactersInName () {
-        StepsPage page = new StepsPage (driver);
-        page.clickRegisterButton();
-        page.fillNameSurname("!@#",",,,", true);
-    }
-    @Test (description = "Checks the ability to enter less than 9 digits in mobile number field")
-    public void firstMobileNumber () {
-        StepsPage page = new StepsPage (driver);
-        page.mobileNumber("5",true);
-    }
-    @Test (description = "Checks the ability to enter more than 9 digits in mobile number field")
-    public void secondMobileNumber () {
         StepsPage page = new StepsPage(driver);
-        page.mobileNumber ("59999999999", true);
+        page.fillNameSurname("!@#", ",,,", true);
     }
-    @Test (description = "Checks the ability to enter email address without domain name in email field")
-    public void emailWithoutDomain() {
-        StepsPage page = new StepsPage(driver);
-        page.fillEmail("testappium", true);
 
+    @Test (description = "Checks the ability to enter less than 9 digits in mobile number field")
+    public void checkMobileNumberShort () {
+        StepsPage page = new StepsPage(driver);
+        page.mobileNumber("5", true);
+    }
+
+    @Test (description = "Checks the ability to enter more than 9 digits in mobile number field")
+    public void examineMobileNumberLong () {
+        StepsPage page = new StepsPage(driver);
+        page.mobileNumber("59999999999", true);
+    }
+
+    @Test (description = "Checks the ability to enter email address without domain name in email field")
+    public void inputWithoutDomain () {
+        StepsPage page = new StepsPage(driver);
+        page.fillIncompleteEmail ("testappium", true);
+    }
+
+    @Test (description = "Checks the ability to enter mobile phone number in email field")
+    public void phoneNumberInEmail () {
+        StepsPage page = new StepsPage(driver);
+        page.fillEmail("593712302", true);
+    }
+
+    @Test (description = "Fill email address in email field")
+    public void signUpWithEmailAddress() {
+        StepsPage page = new StepsPage(driver);
+        page.fillEmail("testappium@gmail.com",true);
     }
     /*
     @Test (description = "Checks login with correct username and incorrect password")
@@ -52,4 +71,4 @@ public class NegativeTest extends Base {
         page.clearFields();
     }
      */
-}
+    }
