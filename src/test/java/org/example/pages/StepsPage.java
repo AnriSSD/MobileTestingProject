@@ -1,6 +1,7 @@
 package org.example.pages;
 
 import io.appium.java_client.android.AndroidDriver;
+import org.example.Utils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -12,27 +13,70 @@ public class StepsPage {
 
     AndroidDriver driver;
     WebDriverWait wait;
+    private Utils utils;
+    private Selectors selectors;
 
     public StepsPage(AndroidDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait (driver, Duration.ofSeconds(10)); // 10 seconds wait
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 seconds wait
         PageFactory.initElements(driver, this);
+        utils = new Utils(driver);
+        selectors = new Selectors(driver);
     }
 
+    //Selectors for login
     @FindBy(xpath = "//android.widget.MultiAutoCompleteTextView")
     private WebElement username;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[2]/android.view.ViewGroup[1]")
     private WebElement passwordField;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.View[4]")
     private WebElement passwordFieldAfterLogin;
-    @FindBy (xpath = "//android.widget.EditText[@resource-id=\"com.facebook.lite:id/inline_textbox_edittext\"]")
+    @FindBy(xpath = "//android.widget.EditText[@resource-id=\"com.facebook.lite:id/inline_textbox_edittext\"]")
     private WebElement password;
-    @FindBy (xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[2]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[2]")
     private WebElement loginBtn;
-    @FindBy (xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup")
     private WebElement closeLoginErrorMessage;
 
-
+    //Selectors for registration
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[2]/android.view.ViewGroup[4]/android.view.View")
+    private WebElement createAccount;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.View")
+    private WebElement nextButtonFirst;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[1]")
+    private WebElement nameField;
+    @FindBy(id = "com.facebook.lite:id/inline_textbox_edittext")
+    private WebElement name;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[2]")
+    private WebElement surnameField;
+    @FindBy(id = "com.facebook.lite:id/inline_textbox_edittext")
+    private WebElement surname;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.View")
+    private WebElement nextButtonSecond;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.View[6]")
+    private WebElement mobilePhoneField;
+    @FindBy(id = "com.facebook.lite:id/inline_textbox_edittext")
+    private WebElement mobilePhone;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[2]")
+    private WebElement registerWithEmail;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.View[5]")
+    private WebElement emailField;
+    @FindBy(id = "com.facebook.lite:id/inline_textbox_edittext")
+    private WebElement email;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.view.ViewGroup")
+    private WebElement nextButtonThird;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.View[5]")
+    private WebElement yearOfBirth;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[9]/android.view.View")
+    private WebElement birthNumber;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")
+    private WebElement nextButtonFourth;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[2]/android.view.View[2]")
+    private WebElement chooseGender;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[1]")
+    private WebElement newPasswordField;
+    @FindBy(id = "com.facebook.lite:id/inline_textbox_edittext")
+    private WebElement newPassword;
 
     /**
      * The function `fillUsernameWithPassword` fills the username and password fields and with provided values and
@@ -45,8 +89,9 @@ public class StepsPage {
      **/
 
     //ეს მეთოდი ავსებს ინფორმაციას - მომხამრებელს და პაროლს")
-    public void fillUsernameWithPassword (String user, String pass, boolean clickToBtn) {
-        sendkey(user,username);
+    public void fillUsernameWithPassword(String user, String pass, boolean clickToBtn) {
+        sendkey(user, username);
+
         try {
             passwordField.click();
         } catch (Exception e) {
@@ -57,22 +102,24 @@ public class StepsPage {
 
         if (clickToBtn) {
             // clickToLogin();
-            clickToBtn (loginBtn);
+            clickToBtn(loginBtn);
         }
     }
-    public void clickToBtn (WebElement element) {
+
+    public void clickToBtn(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
-    public void sendkey (String txt, WebElement element) {
+
+    public void sendkey(String txt, WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         element.sendKeys(txt);
-        }
+    }
+
     public void closeLoginError() {
         wait.until(ExpectedConditions.visibilityOf(closeLoginErrorMessage));
         closeLoginErrorMessage.click();
     }
-
 
     public void clearFields() {
         wait.until(ExpectedConditions.visibilityOf(username));
@@ -82,8 +129,51 @@ public class StepsPage {
         clearField(password);
     }
 
-    private void clearField(WebElement element) {
+    public void clearField(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         element.clear();
     }
+
+    public void clickRegisterButton() {
+        clickToBtn(createAccount);
+        clickToBtn(nextButtonFirst);
+    }
+
+    public void fillNameSurname(String firstField, String secondField, boolean clickToBtn) {
+        nameField.click();
+        sendkey(firstField, name);
+        surnameField.click();
+        sendkey(secondField, surname);
+
+        if (clickToBtn) {
+            // clickToNext();
+            clickToBtn(nextButtonSecond);
+        }
+    }
+
+    public void mobileNumber (String number, boolean clickToBtn) {
+        mobilePhoneField.click();
+        clearField(mobilePhone);
+        sendkey(number, mobilePhone);
+        if (clickToBtn) {
+            // clickToNext();
+            clickToBtn(nextButtonThird);
+        }
+    }
+    public void fillEmail (String mail, boolean clickToBtn) {
+        clickToBtn(registerWithEmail);
+        clickToBtn(emailField);
+        try {
+            Thread.sleep(2000); // 2 second delay
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        clearField(email);
+        sendkey(mail,email);
+        clickToBtn(nextButtonThird);
+    }
 }
+
+
+
+
