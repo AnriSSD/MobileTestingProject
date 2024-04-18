@@ -3,6 +3,7 @@ package org.example.tests;
 import org.example.Base;
 import org.example.pages.Selectors;
 import org.example.pages.StepsPage;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class NegativeTest extends Base {
@@ -47,6 +48,13 @@ public class NegativeTest extends Base {
         StepsPage page = new StepsPage(driver);
         page.fillEmail("testappium@gmail.com",true);
     }
+    @Test (description = "Checks register with an incorrectly formatted birth year (3 digits instead of 4)")
+    public void registerWithInvalidBirthYearFormat () {
+        StepsPage page = new StepsPage(driver);
+        page.gestureClick(true);
+        }
+    }
+
     /*
     @Test (description = "Checks login with correct username and incorrect password")
     public void loginWithWrongPassword () {
@@ -71,4 +79,4 @@ public class NegativeTest extends Base {
         page.clearFields();
     }
      */
-    }
+
