@@ -2,6 +2,8 @@ package org.example.pages;
 
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import org.example.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -78,11 +80,13 @@ public class StepsPage {
     private WebElement email;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.view.ViewGroup")
     private WebElement nextButtonThird;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.View[5]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.View[5]")
     private WebElement yearOfBirth;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[9]/android.view.View")
     private WebElement birthNumber;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[10]")
+    private WebElement deleteBirthNumber;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")
     private WebElement nextButtonFourth;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")
     private WebElement nextButtonFifth;
@@ -153,7 +157,8 @@ public class StepsPage {
         clickToBtn(createAccount);
         clickToBtn(nextButton);
     }
-    public void fillOnlyName (String firstField, boolean clickToBtn) {
+
+    public void fillOnlyName(String firstField, boolean clickToBtn) {
         nameField.click();
         sendkey(firstField, name);
         if (clickToBtn) {
@@ -161,6 +166,7 @@ public class StepsPage {
             clickToBtn(nextButtonFirst);
         }
     }
+
     public void fillNameSurname(String firstName, String lastName, boolean clickToBtn) {
         nameFieldSecond.click();
         clearField(name);
@@ -174,7 +180,7 @@ public class StepsPage {
         }
     }
 
-    public void mobileNumber (String number, boolean clickToBtn) {
+    public void mobileNumber(String number, boolean clickToBtn) {
         mobilePhoneField.click();
         clearField(mobilePhone);
         sendkey(number, mobilePhone);
@@ -183,7 +189,8 @@ public class StepsPage {
             clickToBtn(nextButtonThird);
         }
     }
-    public void fillIncompleteEmail (String mail, boolean clickToBtn) {
+
+    public void fillIncompleteEmail(String mail, boolean clickToBtn) {
         if (clickToBtn) {
             // clickToSignUp();
             clickToBtn(registerWithEmail);
@@ -194,7 +201,8 @@ public class StepsPage {
             clickToBtn(nextButtonThird);
         }
     }
-    public void fillEmail (String number, boolean clickToBtn) {
+
+    public void fillEmail(String number, boolean clickToBtn) {
         if (clickToBtn) {
             clickToBtn(secondEmailField);
             clearField(email);
@@ -203,25 +211,37 @@ public class StepsPage {
         }
     }
 
-    public void gestureClick (boolean clickToBtn) {
-        if (clickToBtn) {
-            clickToBtn(yearOfBirth);
-        }
-        WebElement wrongDateBirth = driver.findElement(By.xpath("//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[5]/android.view.ViewGroup[1]"));
-        driver.executeScript("mobile: doubleClickGesture",ImmutableMap.of(
+    public void gestureClick(boolean clickToBtn) throws InterruptedException {
+        yearOfBirth.click();
+        WebElement wrongDateBirth = driver.findElement(By.xpath("//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[1]"));
+        driver.executeScript("mobile: doubleClickGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) wrongDateBirth).getId()
-                ));
+        ));
+        Thread.sleep(2000);
         wrongDateBirth.click();
-        nextButtonFourth.click();
+        if (clickToBtn) {
+            // clickToNext();
+            clickToBtn(nextButtonFourth);
+        }
     }
-}
 
-/*
-// Java
-((JavascriptExecutor) driver).executeScript("mobile: doubleClickGesture", ImmutableMap.of(
-    "elementId", ((RemoteWebElement) element).getId()
-    //android.widget.FrameLayout[@resource-id="com.facebook.lite:id/main_layout"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[1]
-));
- */
-
+    public void deleteBirth(boolean clickToBtn) {
+        yearOfBirth.click();
+        deleteBirthNumber.click();
+        if (clickToBtn) {
+            // clickToNext();
+            clickToBtn(nextButtonFourth);
+        }
+    }
+            public void clickBirthNumberThreeTimes () {
+                for (int i = 0; i < 3; i++) {
+                    birthNumber.click();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
 

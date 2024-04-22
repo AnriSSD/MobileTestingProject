@@ -49,11 +49,17 @@ public class NegativeTest extends Base {
         page.fillEmail("testappium@gmail.com",true);
     }
     @Test (description = "Checks register with an incorrectly formatted birth year (3 digits instead of 4)")
-    public void registerWithInvalidBirthYearFormat () {
+    public void registerWithInvalidBirthYearFormat () throws InterruptedException {
         StepsPage page = new StepsPage(driver);
         page.gestureClick(true);
         }
+    @Test (description = "Checks register without birth year (0 digits instead of 4)")
+    public void registerWithoutBirthYear () {
+        StepsPage page = new StepsPage(driver);
+        page.deleteBirth(true);
     }
+    }
+
 
     /*
     @Test (description = "Checks login with correct username and incorrect password")

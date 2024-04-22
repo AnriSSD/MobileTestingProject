@@ -40,7 +40,7 @@ public class Base {
     public static void tearDown() {
         System.out.println("დავიწყე დრაივერის შემოწმება");
         if (driver != null) {
-            System.out.println("დავიწყე დრივერის გაუქმება");
+            System.out.println("დავიწყე დრაივერის გაუქმება");
             driver.quit();
             System.out.println("დრაივერი გაუქმებულია");
         }
