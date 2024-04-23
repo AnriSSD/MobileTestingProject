@@ -84,12 +84,16 @@ public class StepsPage {
     private WebElement yearOfBirth;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[9]/android.view.View")
     private WebElement birthNumber;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[10]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[5]/android.view.ViewGroup[10]")
     private WebElement deleteBirthNumber;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.View[5]")
+    private WebElement incorrectBirthNumber;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")
     private WebElement nextButtonFourth;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")
     private WebElement nextButtonFifth;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[2]/android.view.ViewGroup")
+    private WebElement nextButtonSixth;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[2]/android.view.View[2]")
     private WebElement chooseGender;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[1]")
@@ -225,23 +229,18 @@ public class StepsPage {
         }
     }
 
-    public void deleteBirth(boolean clickToBtn) {
-        yearOfBirth.click();
-        deleteBirthNumber.click();
-        if (clickToBtn) {
-            // clickToNext();
-            clickToBtn(nextButtonFourth);
-        }
-    }
-            public void clickBirthNumberThreeTimes () {
-                for (int i = 0; i < 3; i++) {
-                    birthNumber.click();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+    public void deleteBirth() throws InterruptedException {
+        clickToBtn(incorrectBirthNumber);
+            Thread.sleep(1000);
+            clickToBtn(deleteBirthNumber);
+            Thread.sleep(1000);
+            clickToBtn(nextButtonFifth);
+            clickToBtn(nextButtonSixth);
+            }
+    public void restart() {
+        utils.restartApp();
             }
         }
+
+
 

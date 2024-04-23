@@ -14,7 +14,8 @@ public class Utils {
     public void androidBack() {
         driver.pressKey (new KeyEvent(AndroidKey.BACK));
     }
-    public void closeApp() {
+    public void restartApp() {
         driver.terminateApp("com.facebook.lite");
+        driver.activateApp("com.facebook.lite");
     }
 }
