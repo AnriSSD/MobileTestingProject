@@ -66,6 +66,19 @@ public class NegativeTest extends Base {
         page.closeLoginError();
         page.clearFields();
     }
+    @Test (description = "Checks login with correct username and incorrect password")
+    public void test11_RightPassword () {
+        StepsPage page = new StepsPage (driver);
+        page.restart();
+        page.fillUsernameWithPassword ("haivpmlhhlwrwkgplt@cazlp.com","Qatest123",true);
+        page.closeNotNow();
+    }
+    @Test (description = "Checks the possibility of publishing photos")
+    public void test12_UploadPhoto () throws InterruptedException {
+        StepsPage page = new StepsPage (driver);
+        page.uploadPhotoPost();
+    }
+
 }
 
 
