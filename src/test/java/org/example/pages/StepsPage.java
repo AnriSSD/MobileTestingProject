@@ -98,9 +98,9 @@ public class StepsPage {
     @FindBy(id = "com.facebook.lite:id/inline_textbox_edittext")
     private WebElement newPassword;
     //Selectors for main functionality
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[10]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.View")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[2]/android.view.ViewGroup[10]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")
     private WebElement post;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[2]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[2]")
     private WebElement publish;
     @FindBy(xpath = "//android.widget.Toast[@text=\"Добавьте что-нибудь и повторите попытку\"]")
     private WebElement textAfterEmptyPublish;
@@ -114,43 +114,42 @@ public class StepsPage {
 
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[5]")
     private WebElement tagFriends;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[3]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[3]")
     private WebElement chooseFriend;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[4]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[4]")
     private WebElement doneBtn;
 
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[6]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[6]")
     private WebElement addGeolocation;
     @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.view.ViewGroup")
     private WebElement chooseGeolocation;
 
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[7]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[7]")
     private WebElement feelingsOrActions;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[1]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[1]")
     private WebElement chooseFeelingsOrActions;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[2]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[2]")
     private WebElement chooseFeeling;
 
 
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[8]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[8]")
     private WebElement createEvent;
-    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup/android.view.ViewGroup[1]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[2]")
     private WebElement confidentiality;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[5]/android.view.View[2]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]")
     private WebElement chooseConfidentiality;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.widget.MultiAutoCompleteTextView[1]")
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup/android.widget.MultiAutoCompleteTextView[1]")
     private WebElement eventName;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.View[5]")
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup/android.view.View[4]")
     private WebElement eventStart;
     @FindBy(xpath = "//android.view.View[@content-desc=\"30 апреля 2024\"]")
     private WebElement eventSelectDate;
     @FindBy(id = "android:id/button1")
     private WebElement okBtn;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.View[6]")
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup/android.view.View[5]")
     private WebElement eventEnd;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[2]")
     private WebElement saveEvent;
-
     @FindBy(xpath = "//android.widget.ImageView")
     private WebElement addStories;
     @FindBy(xpath = "//android.widget.GridView[@resource-id=\"com.facebook.lite:id/header_recycler_view\"]/android.widget.FrameLayout[1]/android.view.ViewGroup/android.view.ViewGroup[1]")
@@ -343,9 +342,39 @@ public class StepsPage {
 
     public void uploadPhotoPost () throws InterruptedException {
         clickToBtn(post);
+        clickToBtn(choosePhotoForPost);
+        clickToBtn(firstPhotoForPost);
+        clickToBtn(publishPhotoForPost);
     }
+    public void tagFriend () throws InterruptedException {
+        clickToBtn(post);
+        clickToBtn(tagFriends);
+        clickToBtn(chooseFriend);
+        clickToBtn(doneBtn);
+        clickToBtn(publish);
+    }
+    public void postGeolocation () throws InterruptedException {
+        clickToBtn(post);
+        clickToBtn(addGeolocation);
+        clickToBtn(chooseGeolocation);
+        clickToBtn(publish);
+    }
+    public void postEvent (String name) throws InterruptedException {
+        clickToBtn(post);
+        clickToBtn(createEvent);
+        clickToBtn(confidentiality);
+        clickToBtn(chooseConfidentiality);
+        sendkey(name, eventName);
+        clickToBtn(eventStart);
+        clickToBtn(eventSelectDate);
+        clickToBtn(okBtn);
+        clickToBtn(eventEnd);
+        clickToBtn(saveEvent);
+        Thread.sleep(2000);
+        clickToBtn(saveEvent);
+    }
+}
 
-    }
 
 
 

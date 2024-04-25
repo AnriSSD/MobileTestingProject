@@ -78,6 +78,24 @@ public class NegativeTest extends Base {
         StepsPage page = new StepsPage (driver);
         page.uploadPhotoPost();
     }
+    @Test (description = "Checks the possibility of friends tagging")
+    public void test13_TagFriend () throws InterruptedException {
+        StepsPage page = new StepsPage (driver);
+        page.restart();
+        page.tagFriend();
+    }
+    @Test (description = "Checks the possibility of geolocation posting")
+    public void test14_PostGeolocation () throws InterruptedException {
+        StepsPage page = new StepsPage (driver);
+        page.restart();
+        page.postGeolocation();
+    }
+    @Test (description = "Checks the possibility of geolocation posting")
+    public void test15_PostEvent() throws InterruptedException {
+        StepsPage page = new StepsPage (driver);
+        page.restart();
+        page.postEvent("123");
+    }
 
 }
 
