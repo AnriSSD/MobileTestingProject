@@ -11,19 +11,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.HashMap;
 
 public class StepsPage {
 
     AndroidDriver driver;
     WebDriverWait wait;
     private Utils utils;
-    private Selectors selectors;
     public StepsPage(AndroidDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 seconds wait
         PageFactory.initElements(driver, this);
         utils = new Utils(driver);
-        selectors = new Selectors(driver);
     }
 
     //Selectors for login
@@ -98,7 +97,7 @@ public class StepsPage {
     @FindBy(id = "com.facebook.lite:id/inline_textbox_edittext")
     private WebElement newPassword;
     //Selectors for main functionality
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[2]/android.view.ViewGroup[10]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")
     private WebElement post;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[2]")
     private WebElement publish;
@@ -112,8 +111,10 @@ public class StepsPage {
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[2]")
     private WebElement publishPhotoForPost;
 
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[5]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[2]/android.view.ViewGroup[5]")
     private WebElement tagFriends;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[5]")
+    private WebElement tagFriendsSecond;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[3]")
     private WebElement chooseFriend;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[4]")
@@ -132,7 +133,7 @@ public class StepsPage {
     private WebElement chooseFeeling;
 
 
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[8]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[2]/android.view.ViewGroup[8]")
     private WebElement createEvent;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[2]")
     private WebElement confidentiality;
@@ -150,6 +151,7 @@ public class StepsPage {
     private WebElement eventEnd;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[2]")
     private WebElement saveEvent;
+
     @FindBy(xpath = "//android.widget.ImageView")
     private WebElement addStories;
     @FindBy(xpath = "//android.widget.GridView[@resource-id=\"com.facebook.lite:id/header_recycler_view\"]/android.widget.FrameLayout[1]/android.view.ViewGroup/android.view.ViewGroup[1]")
@@ -163,23 +165,27 @@ public class StepsPage {
     private WebElement musicForStories;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[7]/android.view.ViewGroup")
     private WebElement chooseMusicForStories;
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.view.ViewGroup")
+    private WebElement chooseBackgroundForStories;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[11]")
     private WebElement publishMusicForStories;
 
     @FindBy(xpath = "(//android.widget.ImageView[@resource-id=\"com.facebook.lite:id/gallery_item_image\"])[1]")
     private WebElement firstPhotoForStories;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[8]/android.view.View[2]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[8]")
     private WebElement drawing;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[6]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[6]")
     private WebElement doneBtnSecond;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[11]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[11]")
+    private WebElement publishDrawingForStories;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[12]")
     private WebElement publishPhotoForStories;
     @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.view.ViewGroup[2]")
     private WebElement yourStories;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[5]/android.view.View[2]")
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[5]")
     private WebElement threeDotsStories;
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]")
-    private WebElement deletePhoto;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]")
+    private WebElement deleteStories;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]")
     private WebElement approveDelete;
     @FindBy(xpath = "//android.widget.Toast[@text=\"Фото удалено\"]")
@@ -191,10 +197,12 @@ public class StepsPage {
     @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.view.ViewGroup")
     private WebElement goToProfile;
 
-    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.view.ViewGroup[2]")
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[3]/android.view.ViewGroup[2]")
     private WebElement editProfile;
     @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.view.View")
     private WebElement editProfilePhoto;
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[4]")
+    private WebElement checkProfilePhoto;
 
     @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[3]")
     private WebElement addFrame;
@@ -336,30 +344,58 @@ public class StepsPage {
             clickToBtn(nextButtonFifth);
             clickToBtn(nextButtonSixth);
             }
-    public void restart() {
+    public void restart() throws InterruptedException {
         utils.restartApp();
-            }
-
+    }
+    public void back() {
+        utils.androidBack();
+    }
     public void uploadPhotoPost () throws InterruptedException {
+        Thread.sleep(1000);
         clickToBtn(post);
         clickToBtn(choosePhotoForPost);
         clickToBtn(firstPhotoForPost);
         clickToBtn(publishPhotoForPost);
+        Thread.sleep(2000);
     }
-    public void tagFriend () throws InterruptedException {
+    public void tagFriend() throws InterruptedException {
+        Thread.sleep(2000);
         clickToBtn(post);
-        clickToBtn(tagFriends);
+        Thread.sleep(2000);
+        boolean isTagged = false;
+        try {
+            tagFriends.click();
+            isTagged = true;
+        } catch (Exception e) {
+            System.out.println("tagFriends not found, trying tagFriendsSecond.");
+        }
+        if (!isTagged) {
+            tagFriendsSecond.click();
+        }
         clickToBtn(chooseFriend);
         clickToBtn(doneBtn);
         clickToBtn(publish);
+        Thread.sleep(2000);
     }
+
     public void postGeolocation () throws InterruptedException {
+        Thread.sleep(2000);
         clickToBtn(post);
         clickToBtn(addGeolocation);
         clickToBtn(chooseGeolocation);
         clickToBtn(publish);
     }
+    public void postFeelings () throws InterruptedException {
+        Thread.sleep(2000);
+        clickToBtn(post);
+        clickToBtn(feelingsOrActions);
+        clickToBtn(chooseFeelingsOrActions);
+        clickToBtn(chooseFeeling);
+        clickToBtn(publish);
+        Thread.sleep(2000);
+    }
     public void postEvent (String name) throws InterruptedException {
+        Thread.sleep(2000);
         clickToBtn(post);
         clickToBtn(createEvent);
         clickToBtn(confidentiality);
@@ -373,8 +409,63 @@ public class StepsPage {
         Thread.sleep(2000);
         clickToBtn(saveEvent);
     }
+    public void textStories (String txt) {
+        clickToBtn(addStories);
+        clickToBtn(textForStories);
+        sendkey(txt, fillTextInStories);
+        clickToBtn(publishTextForStories);
+    }
+    public void musicStories () throws InterruptedException {
+        Thread.sleep(2000);
+        clickToBtn(addStories);
+        clickToBtn(musicForStories);
+        clickToBtn(chooseMusicForStories);
+        clickToBtn(chooseBackgroundForStories);
+        clickToBtn(publishMusicForStories);
+        Thread.sleep(2000);
+    }
+    public void drawingInStories () throws InterruptedException {
+        Thread.sleep(2000);
+        clickToBtn(addStories);
+        clickToBtn(firstPhotoForStories);
+        clickToBtn(drawing);
+        Thread.sleep(2000);
+        WebElement swipeElement = driver.findElement(By.xpath("//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[1]/android.view.View"));
+        String elementId = ((RemoteWebElement) swipeElement).getId();
+        driver.executeScript("mobile: swipeGesture", ImmutableMap.of(
+                "elementId", elementId,
+                "direction", "left",
+                "percent", 0.75 //
+        ));
+        clickToBtn(doneBtnSecond);
+        clickToBtn(publishDrawingForStories);
+        }
+        public void photoStories () throws InterruptedException {
+            Thread.sleep(3000);
+            clickToBtn(addStories);
+            clickToBtn(firstPhotoForStories);
+            clickToBtn(publishPhotoForStories);
+        }
+        public void deleteStories () {
+        clickToBtn(yourStories);
+        clickToBtn(threeDotsStories);
+        clickToBtn(deleteStories);
+        clickToBtn(approveDelete);
+        }
+
+        public void checkPhoto () {
+        clickToBtn(goToMenu);
+        clickToBtn(goToProfile);
+        clickToBtn(editProfile);
+        clickToBtn(editProfilePhoto);
+        clickToBtn(checkProfilePhoto);
+        }
+        public void addFrame () {
+        clickToBtn(editProfilePhoto);
+        clickToBtn(addFrame);
+        clickToBtn(frame);
+        clickToBtn(updateFrame);
+    }
 }
-
-
 
 
