@@ -122,6 +122,8 @@ public class StepsPage {
 
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[6]")
     private WebElement addGeolocation;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[2]/android.view.ViewGroup[6]")
+    private WebElement addGeolocationSecond;
     @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.view.ViewGroup")
     private WebElement chooseGeolocation;
 
@@ -135,6 +137,8 @@ public class StepsPage {
 
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[2]/android.view.ViewGroup[8]")
     private WebElement createEvent;
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[8]")
+    private WebElement createEventSecond;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup[2]")
     private WebElement confidentiality;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]")
@@ -211,12 +215,6 @@ public class StepsPage {
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[4]")
     private WebElement updateFrame;
 
-    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[3]/android.view.View[3]")
-    private WebElement makePhoto;
-    @FindBy(id = "com.android.camera2:id/shutter_button")
-    private WebElement shutterBtn;
-    @FindBy(id = "com.android.camera2:id/done_button")
-    private WebElement doneBtnThird;
 
     /**
      * The function `fillUsernameWithPassword` fills the username and password fields and with provided values and
@@ -381,7 +379,17 @@ public class StepsPage {
     public void postGeolocation () throws InterruptedException {
         Thread.sleep(2000);
         clickToBtn(post);
-        clickToBtn(addGeolocation);
+        Thread.sleep(2000);
+        boolean isTagged = false;
+        try {
+            addGeolocation.click();
+            isTagged = true;
+        } catch (Exception e) {
+            System.out.println("addGeolocation not found, trying addGeolocationSecond");
+        }
+        if (!isTagged) {
+            addGeolocationSecond.click();
+        }
         clickToBtn(chooseGeolocation);
         clickToBtn(publish);
     }
@@ -397,7 +405,17 @@ public class StepsPage {
     public void postEvent (String name) throws InterruptedException {
         Thread.sleep(2000);
         clickToBtn(post);
-        clickToBtn(createEvent);
+        Thread.sleep(2000);
+        boolean isTagged = false;
+        try {
+            createEvent.click();
+            isTagged = true;
+        } catch (Exception e) {
+            System.out.println("createEvent not found, trying createEventSecond");
+        }
+        if (!isTagged) {
+            createEventSecond.click();
+        }
         clickToBtn(confidentiality);
         clickToBtn(chooseConfidentiality);
         sendkey(name, eventName);
@@ -438,12 +456,14 @@ public class StepsPage {
                 "percent", 0.75 //
         ));
         clickToBtn(doneBtnSecond);
+        Thread.sleep(2000);
         clickToBtn(publishDrawingForStories);
         }
         public void photoStories () throws InterruptedException {
             Thread.sleep(3000);
             clickToBtn(addStories);
             clickToBtn(firstPhotoForStories);
+            Thread.sleep(2000);
             clickToBtn(publishPhotoForStories);
         }
         public void deleteStories () {
