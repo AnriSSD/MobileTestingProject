@@ -128,30 +128,37 @@ public class NegativeTest extends Base {
         page.drawingInStories();
     }
 
-    @Test(description = "Checks the possibility of posting photo in stories")
+    @Test (description = "Checks the possibility of posting photo in stories")
     public void test20_PostPhotoStories() throws InterruptedException {
         StepsPage page = new StepsPage(driver);
         page.photoStories();
     }
 
-    @Test(description = "Checks the possibility of deleting stories")
+    @Test (description = "Checks the possibility of deleting stories")
     public void test21_DeleteStories() {
         StepsPage page = new StepsPage(driver);
         page.deleteStories();
     }
 
-    @Test(description = "Checks the ability to open a profile photo")
+    @Test (description = "Checks the ability to open a profile photo")
     public void test22_CheckPhoto() {
         StepsPage page = new StepsPage(driver);
         page.back();
         page.checkPhoto();
     }
-    @Test(description = "Checks the ability to update profile frame")
+    @Test (description = "Checks the ability to update profile frame")
     public void test23_UpdateFrame() {
         StepsPage page = new StepsPage(driver);
         page.back();
         page.addFrame();
     }
+    @Test (description = "Checks the ability to save post in favorites")
+    public void test24_SavePost() throws InterruptedException {
+        StepsPage page = new StepsPage(driver);
+        page.restart();
+        page.addToFav();
+    }
+
 }
 
     /*

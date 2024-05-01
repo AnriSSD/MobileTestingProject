@@ -18,6 +18,7 @@ public class StepsPage {
     AndroidDriver driver;
     WebDriverWait wait;
     private Utils utils;
+
     public StepsPage(AndroidDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 seconds wait
@@ -147,7 +148,7 @@ public class StepsPage {
     private WebElement eventName;
     @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup/android.view.View[4]")
     private WebElement eventStart;
-    @FindBy(xpath = "//android.view.View[@content-desc=\"30 апреля 2024\"]")
+    @FindBy(xpath = "//android.view.View[@content-desc=\"31 мая 2024\"]")
     private WebElement eventSelectDate;
     @FindBy(id = "android:id/button1")
     private WebElement okBtn;
@@ -214,6 +215,12 @@ public class StepsPage {
     private WebElement frame;
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[4]")
     private WebElement updateFrame;
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.View")
+    private WebElement threeDotsPost;
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[5]/android.view.ViewGroup")
+    private WebElement savePost;
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.view.ViewGroup[8]")
+    private WebElement favorites;
 
 
     /**
@@ -241,23 +248,34 @@ public class StepsPage {
             clickToBtn(loginBtn);
         }
     }
+    /**
+     * Waits for an element to be clickable and then clicks it.
+     * @param element The web element to be clicked.
+     */
     public void clickToBtn(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
+    /**
+     * Waits for an element to be visible and then sends the specified text to it.
+     * @param txt The text to be entered.
+     * @param element The web element that will receive the text.
+     */
     public void sendkey(String txt, WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         element.sendKeys(txt);
     }
+
     public void closeNotNow() {
         wait.until(ExpectedConditions.visibilityOf(notNowBtn));
         clickToBtn(notNowBtn);
     }
+
     public void closeLoginError() {
         wait.until(ExpectedConditions.visibilityOf(closeLoginErrorMessage));
         closeLoginErrorMessage.click();
     }
-
+    // Clear input fields (username and password)
     public void clearFields() {
         wait.until(ExpectedConditions.visibilityOf(username));
         clearField(username);
@@ -265,6 +283,10 @@ public class StepsPage {
         passwordFieldAfterLogin.click();
         clearField(password);
     }
+    /**
+     * Clears the text from a specified web element.
+     * @param element The web element whose text will be cleared.
+     */
     public void clearField(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         element.clear();
@@ -274,6 +296,11 @@ public class StepsPage {
         clickToBtn(createAccount);
         clickToBtn(nextButton);
     }
+    /**
+     * Fills in only the name field and optionally clicks the next button.
+     * @param firstField The name to be entered.
+     * @param clickToBtn If true, the next button will be clicked.
+     */
     public void fillOnlyName(String firstField, boolean clickToBtn) {
         nameField.click();
         sendkey(firstField, name);
@@ -282,6 +309,7 @@ public class StepsPage {
             clickToBtn(nextButtonFirst);
         }
     }
+
     public void fillNameSurname(String firstName, String lastName, boolean clickToBtn) {
         nameFieldSecond.click();
         clearField(name);
@@ -293,6 +321,7 @@ public class StepsPage {
             clickToBtn(nextButtonSecond);
         }
     }
+
     public void mobileNumber(String number, boolean clickToBtn) {
         mobilePhoneField.click();
         clearField(mobilePhone);
@@ -302,6 +331,7 @@ public class StepsPage {
             clickToBtn(nextButtonThird);
         }
     }
+
     public void fillIncompleteEmail(String mail, boolean clickToBtn) {
         if (clickToBtn) {
             // clickToSignUp();
@@ -313,6 +343,7 @@ public class StepsPage {
             clickToBtn(nextButtonThird);
         }
     }
+
     public void fillEmail(String number, boolean clickToBtn) {
         if (clickToBtn) {
             clickToBtn(secondEmailField);
@@ -321,6 +352,11 @@ public class StepsPage {
             clickToBtn(nextButtonThird);
         }
     }
+    /**
+     * Performs a gesture click on the year of birth element and optionally clicks the next button.
+     * @param clickToBtn If true, the next button will be clicked after the gesture.
+     * @throws InterruptedException If the thread is interrupted while sleeping.
+     */
     public void gestureClick(boolean clickToBtn) throws InterruptedException {
         yearOfBirth.click();
         WebElement wrongDateBirth = driver.findElement(By.xpath("//android.widget.FrameLayout[@resource-id=\"com.facebook.lite:id/main_layout\"]/android.widget.FrameLayout/android.view.ViewGroup[4]/android.view.ViewGroup[1]"));
@@ -334,21 +370,25 @@ public class StepsPage {
             clickToBtn(nextButtonFourth);
         }
     }
+
     public void deleteBirth() throws InterruptedException {
         clickToBtn(incorrectBirthNumber);
-            Thread.sleep(1000);
-            clickToBtn(deleteBirthNumber);
-            Thread.sleep(1000);
-            clickToBtn(nextButtonFifth);
-            clickToBtn(nextButtonSixth);
-            }
+        Thread.sleep(1000);
+        clickToBtn(deleteBirthNumber);
+        Thread.sleep(1000);
+        clickToBtn(nextButtonFifth);
+        clickToBtn(nextButtonSixth);
+    }
+
     public void restart() throws InterruptedException {
         utils.restartApp();
     }
+
     public void back() {
         utils.androidBack();
     }
-    public void uploadPhotoPost () throws InterruptedException {
+
+    public void uploadPhotoPost() throws InterruptedException {
         Thread.sleep(1000);
         clickToBtn(post);
         clickToBtn(choosePhotoForPost);
@@ -356,6 +396,11 @@ public class StepsPage {
         clickToBtn(publishPhotoForPost);
         Thread.sleep(2000);
     }
+    /**
+     * Tags a friend in a post. The method waits before each action to ensure that the UI has time to update.
+     * It attempts to click the 'tag friends' button, and if not found, tries an alternative button.
+     * After successfully tagging, it finalizes the action by clicking the 'done' and 'publish' buttons.
+     */
     public void tagFriend() throws InterruptedException {
         Thread.sleep(2000);
         clickToBtn(post);
@@ -376,7 +421,7 @@ public class StepsPage {
         Thread.sleep(2000);
     }
 
-    public void postGeolocation () throws InterruptedException {
+    public void postGeolocation() throws InterruptedException {
         Thread.sleep(2000);
         clickToBtn(post);
         Thread.sleep(2000);
@@ -393,7 +438,8 @@ public class StepsPage {
         clickToBtn(chooseGeolocation);
         clickToBtn(publish);
     }
-    public void postFeelings () throws InterruptedException {
+
+    public void postFeelings() throws InterruptedException {
         Thread.sleep(2000);
         clickToBtn(post);
         clickToBtn(feelingsOrActions);
@@ -402,7 +448,8 @@ public class StepsPage {
         clickToBtn(publish);
         Thread.sleep(2000);
     }
-    public void postEvent (String name) throws InterruptedException {
+
+    public void postEvent(String name) throws InterruptedException {
         Thread.sleep(2000);
         clickToBtn(post);
         Thread.sleep(2000);
@@ -427,13 +474,15 @@ public class StepsPage {
         Thread.sleep(2000);
         clickToBtn(saveEvent);
     }
-    public void textStories (String txt) {
+
+    public void textStories(String txt) {
         clickToBtn(addStories);
         clickToBtn(textForStories);
         sendkey(txt, fillTextInStories);
         clickToBtn(publishTextForStories);
     }
-    public void musicStories () throws InterruptedException {
+
+    public void musicStories() throws InterruptedException {
         Thread.sleep(2000);
         clickToBtn(addStories);
         clickToBtn(musicForStories);
@@ -442,7 +491,12 @@ public class StepsPage {
         clickToBtn(publishMusicForStories);
         Thread.sleep(2000);
     }
-    public void drawingInStories () throws InterruptedException {
+    /**
+     * Adds a drawing to a story. This method opens the story creation interface, selects the first photo,
+     * initiates the drawing tool, and performs a swipe gesture to create a drawing. After a delay for the drawing
+     * to be processed, it finalizes the action by publishing the drawing to the stories.
+     */
+    public void drawingInStories() throws InterruptedException {
         Thread.sleep(2000);
         clickToBtn(addStories);
         clickToBtn(firstPhotoForStories);
@@ -458,34 +512,45 @@ public class StepsPage {
         clickToBtn(doneBtnSecond);
         Thread.sleep(2000);
         clickToBtn(publishDrawingForStories);
-        }
-        public void photoStories () throws InterruptedException {
-            Thread.sleep(3000);
-            clickToBtn(addStories);
-            clickToBtn(firstPhotoForStories);
-            Thread.sleep(2000);
-            clickToBtn(publishPhotoForStories);
-        }
-        public void deleteStories () {
+    }
+
+    public void photoStories() throws InterruptedException {
+        Thread.sleep(3000);
+        clickToBtn(addStories);
+        clickToBtn(firstPhotoForStories);
+        Thread.sleep(2000);
+        clickToBtn(publishPhotoForStories);
+    }
+
+    public void deleteStories() {
         clickToBtn(yourStories);
         clickToBtn(threeDotsStories);
         clickToBtn(deleteStories);
         clickToBtn(approveDelete);
-        }
+    }
 
-        public void checkPhoto () {
+    public void checkPhoto() {
         clickToBtn(goToMenu);
         clickToBtn(goToProfile);
         clickToBtn(editProfile);
         clickToBtn(editProfilePhoto);
         clickToBtn(checkProfilePhoto);
-        }
-        public void addFrame () {
+    }
+
+    public void addFrame() {
         clickToBtn(editProfilePhoto);
         clickToBtn(addFrame);
         clickToBtn(frame);
         clickToBtn(updateFrame);
     }
-}
 
+    public void addToFav() {
+        clickToBtn(threeDotsPost);
+        clickToBtn(savePost);
+        back();
+        clickToBtn(goToMenu);
+        clickToBtn(favorites);
+        System.out.println("It's all, thank u!");
+    }
+}
 
