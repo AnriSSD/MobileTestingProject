@@ -4,7 +4,7 @@ import org.example.Base;
 import org.example.pages.StepsPage;
 import org.testng.annotations.Test;
 
-public class NegativeTest extends Base {
+public class FacebookTest extends Base {
     @Test(description = "Checks the ability to enter only first name without surname")
     public void test01_OnlyFirstName() {
         StepsPage page = new StepsPage(driver);

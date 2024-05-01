@@ -2,7 +2,7 @@
 <suite name="SampleSuite">
     <test name="SampleTest">
         <classes>
-            <class name="org.example.tests.NegativeTest"/>
+            <class name="org.example.tests.FacebookTest"/>
         </classes>
     </test>
 </suite>
